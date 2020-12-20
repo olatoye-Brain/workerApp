@@ -1,0 +1,80 @@
+
+<%- include('_header') %>
+<div class="d-flex flex-row">
+    <div class="p-2 flex-fill"></div>
+    <div class="p-2 flex-fill">
+        <div class="alert alert-primary hide"></div>
+            <div class="alert alert-primary hide"></div>
+            <div class="card-title"><h4>Post Job</h4>
+            <div class="alert alert-primary hide"></div>
+            <div class="card">
+                <div class="alert alert-primary hide"></div>
+                <div class="card-body">
+                    <form method="POST" >
+                        <div class="form-group"> 
+                            <label for="title"></label>
+                            <input placeholder="title"  class="form-control" value="<%= post.title %>" id="title" type="text" required name="title" >
+                        </div>
+                        <div class="form-group"> 
+                            <label for="descripton"></label>
+                            <textarea placeholder="description" name="description"  class="form-control" required  id="description" cols="30" rows="4"><%= post.description %></textarea>
+                        </div>
+                        <button class="btn btn-primary">Post Work</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="p-2 flex-fill"></div>
+</div>
+
+
+
+<script>
+     const form = document.querySelector('form')
+     const titleError = document.getElementById('title')
+     const descriptionError =  document.getElementById('description')
+     
+
+    
+    form.addEventListener('submit', async (e)=>{
+     e.preventDefault()
+     const error = document.querySelector('.alert')
+  
+     let title = form.title.value
+     let description = form.description.value
+
+        try {
+            let res = await fetch("/edit/<%= post._id %>", {
+                method: 'POST',
+                body: JSON.stringify({title, description}),
+                headers: {'Content-Type' : 'application/json'}
+            })
+        
+            let data = await res.json()
+
+            const { post, message } = data
+
+            if(message){
+                error.textContent = message
+                error.classList.remove('hide')
+                setTimeout(()=>{
+                error.classList.add('hide')
+                titleError.value = ""
+                descriptionError.value = ""
+                }, 4000)
+            }
+
+            if(post.workerID){
+                location.assign('/post')
+            }
+
+            
+            console.log(data)
+        } catch (err) {
+            console.log(`Error: ${err}`)
+        }
+
+    })
+
+</script>

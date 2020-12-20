@@ -1,0 +1,102 @@
+
+<%- include('_header') %>
+
+<div class="d-flex flex-row">
+    <div class="p-2 flex-fill"></div>
+    <div class="p-2 flex-fill">
+        <h5 class="center"><%=post.title%></h5>
+        <div class="card mt-2">
+            <div class="card-body">
+                <h6 class="card-title"><%=userConfirm.toUpperCase()%></h6>
+                <div class="card-text mb-2"><%=post.description %></div>
+                <div class="card-subtitle text-muted mb-2">
+                <span class="text-small sm"><%= post.date.toLocaleDateString()%></span>
+                </div>
+                <a href="#" class="btn btn-secondary"> <%=commentNum %>
+                </a>
+            </div>
+        </div>
+
+        <div class="alert alert-primary hide"></div>
+        <h6 class="center p-tb">Add Comments</h6>
+        <div class="card">
+            <div class="card-body">
+                <form method="POST">
+                    <div class="form-group"> 
+                        <label for="commentPost"></label>
+                        <textarea placeholder="commentPost" name="commentPost" class="form-control" required  id="commentPost" cols="30" rows="4"></textarea>
+                    </div>
+                    <button class="btn btn-primary">Add Comment</button>
+                </form>
+            </div>
+        </div>
+
+        <br/>
+        <% dataCommented.forEach(comment => { %>
+            <div class="card mt-2">
+                <div class="card-body">
+                    <h5><%= (comment.name == worker.name ) ? 'You' : comment.name.toUpperCase() %></h5>
+                    <div class="card-text mb-2"><%=comment.commentPost %></div>
+                    <div class="card-subtitle text-muted mb-2">
+                        <span class="text-small sm"><%= comment.createdAt%></span><br>
+                        <span class="text-small sm"><%= comment.momentData%></span>
+                    </div>
+                    <% if (comment.workerID == worker._id  ) { %>                    
+                        <a href="/editcomments/<%= comment._id %>" class="btn btn-info btn-sm">Edit</a>
+                        <a href="/deletecomments/<%= comment._id %>" class="btn btn-danger btn-sm">Delete</a>
+                    <% } %>
+                </div>
+             </div>
+        <% }) %>
+    </div>
+    <div class="p-2 flex-fill"></div>
+</div>
+</div>
+
+<script>
+    const form = document.querySelector('form')
+    const commentError =  document.getElementById('commentPost')
+    
+
+   
+   form.addEventListener('submit', async (e)=>{
+    e.preventDefault()
+    const error = document.querySelector('.alert')
+    let commentPost = form.commentPost.value
+
+       try {
+           let res = await fetch("/comments/<%= post._id %>", {
+               method: 'POST',
+               body: JSON.stringify({commentPost}),
+               headers: {'Content-Type' : 'application/json'}
+           })
+       
+           let data = await res.json()
+
+           const { message } = data
+        console.log(data)
+
+           if(message){
+               error.textContent = message
+               error.classList.remove('hide')
+               setTimeout(()=>{
+               error.classList.add('hide')
+               commentError.value = ""
+               window.location.reload()
+               }, 3000)
+           }
+
+        //    if(post.workerID){
+        //        location.assign('/comment/<%= post._id %>')
+        //    }
+
+           
+           console.log(data)
+       } catch (err) {
+           console.log(`Error: ${err}`)
+       }
+
+   })
+
+</script>
+

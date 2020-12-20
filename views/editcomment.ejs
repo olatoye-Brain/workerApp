@@ -1,0 +1,74 @@
+
+<%- include('_header') %>
+
+<div class="d-flex flex-row">
+    <div class="p-2 flex-fill"></div>
+    <div class="p-2 flex-fill">
+        <div class="">Post Title</div>
+        <h5 class="center"><%=post.title%></h5>
+        
+        <div class="alert alert-primary hide"></div><br/>
+        <div class="center">Edit Comments</div>
+        <div class="card">
+            <div class="card-body">
+                <form method="POST">
+                    <div class="form-group"> 
+                        <label for="commentPost"></label>
+                        <textarea placeholder="commentPost" name="commentPost" class="form-control" required  id="commentPost" cols="30" rows="4"><%= postComment.commentPost %></textarea>
+                    </div>
+                    <button class="btn btn-primary">Edit Comment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="p-2 flex-fill"></div>
+</div>
+</div>
+
+<script>
+    const form = document.querySelector('form')
+    const commentError =  document.getElementById('commentPost')
+    
+
+   
+   form.addEventListener('submit', async (e)=>{
+    e.preventDefault()
+    const error = document.querySelector('.alert')
+    let commentPost = form.commentPost.value
+
+       try {
+           let res = await fetch("/editcomments/<%= postComment._id %>", {
+               method: 'POST',
+               body: JSON.stringify({commentPost}),
+               headers: {'Content-Type' : 'application/json'}
+           })
+       
+           let data = await res.json()
+
+           const { message } = data
+        console.log(data)
+
+           if(message){
+               error.textContent = message
+               error.classList.remove('hide')
+               setTimeout(()=>{
+               error.classList.add('hide')
+               commentError.value = ""
+               location.assign('/comments/<%=post._id%>')
+               }, 3000)
+           }
+
+        //    if(post.workerID){
+        //        location.assign('/comment/<%= post._id %>')
+        //    }
+
+           
+           console.log(data)
+       } catch (err) {
+           console.log(`Error: ${err}`)
+       }
+
+   })
+
+</script>
+

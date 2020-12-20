@@ -1,0 +1,33 @@
+
+<%- include('_header') %>
+
+<div class="d-flex flex-row">
+    <div class="p-2 flex-fill"></div>
+    <div class="p-2 flex-fill">
+        <div class="jumbotron">
+            <a href="/add" class="btn btn-primary mb-5">Add new work</a>
+            <h5 class="center">Workers Post</h5>
+        </div>
+        <% workerPostList.forEach(post => { %>
+            <div class="card mt-2">
+                <div class="card-body">
+                    <h5><%=post.name.toUpperCase()%></h5>
+                    <h6 class="card-title"><%=post.title%></h6>
+                    <div class="card-text mb-2"><%=post.description %></div>
+                    <div class="card-subtitle text-muted mb-2">
+                        <span class="text-small sm"><%= post.createdAt%></span><br>
+                        <span class="text-small sm"><%= post.momentDate%></span>
+                    </div>
+                    <a href="/comments/<%= post._id %>" class="btn btn-primary btn-sm"><%= post.commentNum %></a>
+                    <% if (post.userID) { %>                    
+                        <a href="/edit/<%= post._id %>" class="btn btn-info btn-sm">Edit</a>
+                        <a href="/delete/<%= post._id %>" class="btn btn-danger btn-sm">Delete</a>
+                    <% } %>
+                </div>
+             </div>
+        <% }) %>
+
+        
+    </div>
+    <div class="p-2 flex-fill"></div>
+</div>

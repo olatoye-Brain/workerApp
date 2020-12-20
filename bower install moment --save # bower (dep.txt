@@ -1,0 +1,34 @@
+bower install moment --save # bower (deprecated)
+Format Dates
+moment().format('MMMM Do YYYY, h:mm:ss a'); // November 22nd 2020, 8:46:05 pm
+moment().format('dddd');                    // Sunday
+moment().format("MMM Do YY");               // Nov 22nd 20
+moment().format('YYYY [escaped] YYYY');     // 2020 escaped 2020
+moment().format();                          // 2020-11-22T20:46:05+01:00
+Relative Time
+moment("20111031", "YYYYMMDD").fromNow(); // 9 years ago
+moment("20120620", "YYYYMMDD").fromNow(); // 8 years ago
+moment().startOf('day').fromNow();        // 21 hours ago
+moment().endOf('day').fromNow();          // in 3 hours
+moment().startOf('hour').fromNow();       // an hour ago
+Calendar Time
+moment().subtract(10, 'days').calendar(); // 11/12/2020
+moment().subtract(6, 'days').calendar();  // Last Monday at 8:46 PM
+moment().subtract(3, 'days').calendar();  // Last Thursday at 8:46 PM
+moment().subtract(1, 'days').calendar();  // Yesterday at 8:46 PM
+moment().calendar();                      // Today at 8:46 PM
+moment().add(1, 'days').calendar();       // Tomorrow at 8:46 PM
+moment().add(3, 'days').calendar();       // Wednesday at 8:46 PM
+moment().add(10, 'days').calendar();      // 12/02/2020
+Multiple Locale Support
+moment.locale();         // en
+moment().format('LT');   // 8:46 PM
+moment().format('LTS');  // 8:46:05 PM
+moment().format('L');    // 11/22/2020
+moment().format('l');    // 11/22/2020
+moment().format('LL');   // November 22, 2020
+moment().format('ll');   // Nov 22, 2020
+moment().format('LLL');  // November 22, 2020 8:46 PM
+moment().format('lll');  // Nov 22, 2020 8:46 PM
+moment().format('LLLL'); // Sunday, November 22, 2020 8:46 PM
+moment().format('llll');
