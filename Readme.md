@@ -1,7 +1,7 @@
 # Workers App
 
-## A simple crud application with login, signup.
-## Users can post thier work add comment, delete, update as well
+### A simple crud application with login, signup with api endpoints.
+### Users can post thier work add comment, delete, update as well
 
 Built With:  
 Express  
