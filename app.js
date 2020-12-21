@@ -41,6 +41,6 @@ app.use('/css', express.static('node_modules/bootstrap/dist/css'))
 
 
 
-app.listen(process.env.PORT, ()=>{
+app.listen(process.env.PORT || 8001, ()=>{
     console.log(`App is listening to port ${process.env.PORT}`)
 })
