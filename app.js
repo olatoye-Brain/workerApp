@@ -5,6 +5,7 @@ const app = express()
 const cookieParser =  require('cookie-parser')
 const cors = require('cors')
 const dotenv = require('dotenv')
+const port = process.env.PORT || 8000
 
 
 dotenv.config()
@@ -42,6 +43,6 @@ app.use('/css', express.static('node_modules/bootstrap/dist/css'))
 
 
 
-app.listen(process.env.PORT || 8000, ()=>{
-    console.log(`App is listening to port ${process.env.PORT}`)
+app.listen(port, ()=>{
+    console.log(`App is listening to port ${port}`)
 })
