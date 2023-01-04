@@ -42,6 +42,7 @@ module.exports.signupPost = async (req, res) => {
                 console.log(worker)
 
                 const token = createToken(worker._id)
+                //cookies time is stored in miliseconds
                 res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000})
                 res.status(201).json({worker: worker._id, message: "Worker Created Successfully", token})
                 console.log(token)

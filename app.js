@@ -10,9 +10,13 @@ const port = process.env.PORT || 8000
 
 dotenv.config()
 
-
-mongoose.connect(process.env.DB_CONNECT, { useUnifiedTopology: true, useNewUrlParser: true })
-.then(()=> console.log('MongoDB Connected!'))
+const MONGO_URI = process.env.MONGO_URI
+mongoose.connect(MONGO_URI, { useUnifiedTopology: true, useNewUrlParser: true })
+.then(()=>{
+    app.listen(port, ()=>{
+    console.log(`App is listening to port ${port}`)
+})
+})
 .catch(err=> console.log(`Error : ${err}`))
 
 app.set('view engine', 'ejs')
@@ -43,6 +47,3 @@ app.use('/css', express.static('node_modules/bootstrap/dist/css'))
 
 
 
-app.listen(port, ()=>{
-    console.log(`App is listening to port ${port}`)
-})
