@@ -1,29 +1,40 @@
     <%- include('_header') %>
-        <div class="d-flex flex-row">
-            <div class="p-2 flex-fill"></div>
-            <div class="p-2 flex-fill">
-                <h4>Login Up</h4><br>
-                <div class="alert alert-primary hide"></div>
-                <div class="card">
-                    <div class="card-body">
-                        <form method="POST">
-                            <div class="form-group"> 
-                                <label for="email"></label>
-                                <input placeholder="email" class="form-control" id="email" type="email" required name="email" >
-                            </div>
-                            <div class="form-group"> 
-                                <label for="password"></label>
-                                <input placeholder="password"  required class="form-control" id="password" type="password" name="password">
-                            </div>
-                            <button class="btn btn-primary">login</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="p-2 flex-fill"></div>
-
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 d-none d-lg-block">
+          <div class="text-center">
+            <img src="../img/workapp.png" width="70%"/>
+          </div>
+          
+          <p class="text-center mt-4" style="font-size: 1.3rem;">
+            WorkApp is a simple task management app for teams. It allows team members to post updates on their tasks, collaborate in real-time through commenting. 
+          </p>
         </div>
-
+        <div class="col-lg-6 col-12">
+            <div style="font-size: 1.8rem; font-weight :bold" class="text-center">WorkApp</div>
+            <div class="d-block d-lg-none">
+              <p>WorkApp is a simple task management app for teams. It allows team members to post updates on their tasks, collaborate in real-time through commenting.</p>
+            </div>
+            <hr/>
+          <h5>Login Up</h5><br>
+          <div class="alert alert-primary hide"></div>
+          <div class="card">
+            <div class="card-body">
+              <form method="POST">
+                <div class="form-group"> 
+                  <label for="email"></label>
+                  <input placeholder="email" class="form-control" id="email" type="email" required name="email" >
+                </div>
+                <div class="form-group"> 
+                  <label for="password"></label>
+                  <input placeholder="password"  required class="form-control" id="password" type="password" name="password">
+                </div>
+                <button class="btn btn-primary">login</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script>
